@@ -24,4 +24,24 @@ public class UserController {
         return this.usuarioService.guardarUsuario(usuario);
     }
 
+    @GetMapping(path = "/{id}")
+    public Optional<UsuarioModel> getUsersById(@PathVariable("id")Long id){
+        return this.UsuarioService.getById(id);
+    }
+
+    @PutMapping(path ="/{id}")
+    public UsuarioModel updateUserById (@RequestBody UsuarioModel request, @PathVariable("id") Long id){
+        return this.UsuarioService.updateById(request, id);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public String UsuarioModel deleteById(@PathVariable("id") Long id)
+        boolean ok = this.UsuarioService.deleteUsuario(id);
+
+        if(ok){
+            return "Usuario with id" + id + " deleted!";  
+        }else{
+            return "Error, tenemos un problema y no podemos eliminar el usuario con ID "
+        }
+    }
 }
